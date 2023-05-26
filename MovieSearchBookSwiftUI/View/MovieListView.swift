@@ -15,10 +15,17 @@ struct MovieListView: View {
        
         NavigationView{
             VStack{
-                TextField("Search Movie", text: $searchMovie, onCommit: {
-                    self.movieListViewModel.doMovieSearch(movieName: searchMovie.trimmingCharacters(in: .whitespacesAndNewlines).addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? searchMovie)
-                }).padding()
-                    .textFieldStyle(.roundedBorder)
+                HStack{
+                    Image(systemName: "magnifyingglass")
+                        .padding(.leading)
+                    TextField("Search Movie", text: $searchMovie, onCommit: {
+                        self.movieListViewModel.doMovieSearch(movieName: searchMovie.trimmingCharacters(in: .whitespacesAndNewlines).addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? searchMovie)
+                            
+                    }).padding()
+                        .textFieldStyle(.roundedBorder)
+                    
+                }
+                
             List(movieListViewModel.movies, id:\.imbdId){ movie in
                 NavigationLink {
                     DetailView(imdbId: movie.imbdId)
